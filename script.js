@@ -1195,8 +1195,6 @@
         initCounters();
         initFireworks();
         initLetter();
-        initQuiz();
-        initMemoryJar();
     }
 
     if (document.readyState === 'loading') {
