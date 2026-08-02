@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 23rd Birthday 🎉</title>
+    <meta name="description" content="A premium, cinematic birthday experience crafted with love for someone truly special.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-trail" id="customCursorTrail"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-content">
+            <div class="loader-ring">
+                <div class="loader-ring-inner"></div>
+            </div>
+            <p class="loader-text">Preparing something special...</p>
+            <div class="loader-bar">
+                <div class="loader-bar-fill" id="loaderBarFill"></div>
+            </div>
+            <p class="loader-percent" id="loaderPercent">0%</p>
+        </div>
+    </div>
+
+    <!-- Floating Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-player-inner">
+            <div class="music-visualizer" id="musicVisualizer">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="music-info">
+                <p class="music-title">Birthday Melody</p>
+                <p class="music-artist">For You ♥</p>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn" aria-label="Play/Pause">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                </button>
+            </div>
+            <div class="music-progress">
+                <div class="music-progress-fill" id="musicProgressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Balloons Container -->
+    <div class="balloons-container" id="balloonsContainer"></div>
+
+    <!-- Background Effects -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    <div class="aurora-bg" id="auroraBg">
+        <div class="aurora-layer aurora-layer-1"></div>
+        <div class="aurora-layer aurora-layer-2"></div>
+        <div class="aurora-layer aurora-layer-3"></div>
+    </div>
+
+    <!-- =================== LANDING SCREEN =================== -->
+    <section class="landing-screen" id="landingScreen">
+        <div class="landing-content">
+            <div class="landing-sparkle-ring" id="sparkleRing"></div>
+            <h1 class="landing-title" id="landingTitle">
+                <span class="title-word" style="--i:0">Happy</span>
+                <span class="title-word title-accent" style="--i:1">23rd</span>
+                <span class="title-word" style="--i:2">Birthday</span>
+                <span class="title-word title-emoji" style="--i:3">🎉</span>
+            </h1>
+            <p class="landing-subtitle" id="landingSubtitle">
+                <span class="subtitle-line" style="--i:0">Today isn't just another day...</span>
+                <span class="subtitle-line" style="--i:1">It's a celebration of someone truly special.</span>
+            </p>
+            <div class="gift-box-wrapper" id="giftBoxWrapper">
+                <div class="gift-box" id="giftBox">
+                    <div class="gift-lid" id="giftLid">
+                        <div class="gift-lid-top"></div>
+                        <div class="gift-ribbon-bow">
+                            <div class="bow-left"></div>
+                            <div class="bow-right"></div>
+                            <div class="bow-knot"></div>
+                        </div>
+                    </div>
+                    <div class="gift-base">
+                        <div class="gift-ribbon-v"></div>
+                        <div class="gift-ribbon-h"></div>
+                        <div class="gift-glow"></div>
+                    </div>
+                    <div class="gift-sparkles">
+                        <span style="--x:-30px;--y:-60px;--d:0.2s"></span>
+                        <span style="--x:30px;--y:-50px;--d:0.4s"></span>
+                        <span style="--x:-50px;--y:-20px;--d:0.6s"></span>
+                        <span style="--x:50px;--y:-30px;--d:0.1s"></span>
+                        <span style="--x:0px;--y:-70px;--d:0.3s"></span>
+                    </div>
+                </div>
+            </div>
+            <button class="open-btn" id="openBtn">
+                <span class="open-btn-icon">🎁</span>
+                <span class="open-btn-text">Open Your Surprise</span>
+                <div class="open-btn-glow"></div>
+            </button>
+        </div>
+    </section>
+
+    <!-- =================== MAIN CONTENT (hidden initially) =================== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- =================== SECTION 1: Timeline =================== -->
+        <section class="section section-timeline" id="sectionTimeline">
+            <div class="section-container">
+                <h2 class="section-heading reveal-up">
+                    <span class="heading-accent">23</span> Years of Greatness
+                </h2>
+                <div class="timeline" id="timeline">
+                    <div class="timeline-line"><div class="timeline-line-fill" id="timelineFill"></div></div>
+                    <div class="timeline-item" data-year="Early Years">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-icon">👶</div>
+                            <h3>Childhood</h3>
+                            <p>Where the story began — full of wonder, curiosity, and the first sparks of an incredible soul.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-year="School Days">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-icon">📚</div>
+                            <h3>School Life</h3>
+                            <p>Learning, growing, making first friends, and discovering what makes you, you.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-year="New Chapter">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-icon">🎓</div>
+                            <h3>College</h3>
+                            <p>A new world of possibilities, independence, and unforgettable memories.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-year="Bonds">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-icon">🤝</div>
+                            <h3>Friendships</h3>
+                            <p>The people who made the journey beautiful — including us, of course.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-year="Vision">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-icon">💫</div>
+                            <h3>Dreams</h3>
+                            <p>Every late night, every plan, every ambition that burns brighter than ever.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-year="Now">
+                        <div class="timeline-dot active-dot"></div>
+                        <div class="timeline-card glass-card highlight-card">
+                            <div class="timeline-icon">🎂</div>
+                            <h3>Today</h3>
+                            <p>23 and absolutely unstoppable. This is your moment. Celebrate it.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-year="Ahead">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-icon">🚀</div>
+                            <h3>Future</h3>
+                            <p>The best chapters haven't been written yet. And they're going to be extraordinary.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 2: Reasons You're Amazing =================== -->
+        <section class="section section-reasons" id="sectionReasons">
+            <div class="section-container">
+                <h2 class="section-heading reveal-up">Reasons You're <span class="heading-accent">Amazing</span></h2>
+                <div class="reasons-grid">
+                    <div class="reason-card glass-card reveal-up" style="--delay:0.1s">
+                        <div class="reason-icon">✨</div>
+                        <h3>Kind Heart</h3>
+                        <p>Your kindness touches everyone around you. It's rare and beautiful.</p>
+                    </div>
+                    <div class="reason-card glass-card reveal-up" style="--delay:0.2s">
+                        <div class="reason-icon">😂</div>
+                        <h3>Funny Personality</h3>
+                        <p>You can make anyone laugh. Your humor is pure magic.</p>
+                    </div>
+                    <div class="reason-card glass-card reveal-up" style="--delay:0.3s">
+                        <div class="reason-icon">💪</div>
+                        <h3>Strong</h3>
+                        <p>Through every storm, you stand tall. Your strength inspires.</p>
+                    </div>
+                    <div class="reason-card glass-card reveal-up" style="--delay:0.4s">
+                        <div class="reason-icon">🎯</div>
+                        <h3>Ambitious</h3>
+                        <p>You dream big and chase those dreams relentlessly.</p>
+                    </div>
+                    <div class="reason-card glass-card reveal-up" style="--delay:0.5s">
+                        <div class="reason-icon">🤝</div>
+                        <h3>Loyal Friend</h3>
+                        <p>Always there, always true. Friendship at its finest.</p>
+                    </div>
+                    <div class="reason-card glass-card reveal-up" style="--delay:0.6s">
+                        <div class="reason-icon">🔥</div>
+                        <h3>Inspiring</h3>
+                        <p>You inspire others just by being unapologetically yourself.</p>
+                    </div>
+                    <div class="reason-card glass-card reveal-up" style="--delay:0.7s">
+                        <div class="reason-icon">❤️</div>
+                        <h3>Always There</h3>
+                        <p>In good times and tough times, you're the one who never leaves.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 4: Birthday Wishes =================== -->
+        <section class="section section-wishes-text" id="sectionWishesText">
+            <div class="section-container section-narrow">
+                <h2 class="section-heading reveal-up">Birthday <span class="heading-accent">Wishes</span></h2>
+                <div class="handwritten-container glass-card reveal-up">
+                    <div class="handwritten-text" id="handwrittenText">
+                        <p class="hw-line" data-line="0">I don't say it often,</p>
+                        <p class="hw-line" data-line="1">but I'm really grateful to have you in my life.</p>
+                        <p class="hw-line hw-gap" data-line="2">May this year bring success,</p>
+                        <p class="hw-line" data-line="3">happiness,</p>
+                        <p class="hw-line" data-line="4">peace,</p>
+                        <p class="hw-line" data-line="5">good health,</p>
+                        <p class="hw-line" data-line="6">new adventures,</p>
+                        <p class="hw-line" data-line="7">and everything you dream of.</p>
+                        <p class="hw-line hw-gap hw-signature" data-line="8">Happy Birthday once again. ♥</p>
+                    </div>
+                    <div class="handwritten-cursor" id="hwCursor"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 5: 23 Wishes =================== -->
+        <section class="section section-bubbles" id="sectionBubbles">
+            <div class="section-container">
+                <h2 class="section-heading reveal-up"><span class="heading-accent">23</span> Wishes For You</h2>
+                <p class="section-subtext reveal-up">Click each bubble to reveal a wish ✨</p>
+                <div class="bubbles-grid" id="bubblesGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 6: Memory Wall =================== -->
+        <section class="section section-memory-wall" id="sectionMemoryWall">
+            <div class="section-container">
+                <h2 class="section-heading reveal-up">Memory <span class="heading-accent">Wall</span></h2>
+                <div class="memory-wall" id="memoryWall">
+                    <div class="sticky-note" style="--bg:#fef3c7;--rotate:-2deg;">
+                        <p>Remember that time we got lost and ended up having the best day ever? 😂</p>
+                        <span class="note-author">— Best Friend</span>
+                    </div>
+                    <div class="sticky-note" style="--bg:#dbeafe;--rotate:3deg;">
+                        <p>You're the kind of person who makes everyone feel welcome. Never change. 💙</p>
+                        <span class="note-author">— A Friend</span>
+                    </div>
+                    <div class="sticky-note" style="--bg:#fce7f3;--rotate:-1deg;">
+                        <p>23 looks amazing on you! Here's to another year of being awesome! 🎉</p>
+                        <span class="note-author">— Someone Special</span>
+                    </div>
+                    <div class="sticky-note" style="--bg:#d1fae5;--rotate:2deg;">
+                        <p>Thank you for always being real. The world needs more people like you. 🌍</p>
+                        <span class="note-author">— Your Crew</span>
+                    </div>
+                    <div class="sticky-note" style="--bg:#ede9fe;--rotate:-3deg;">
+                        <p>Our friendship is proof that some things are meant to last forever. 💫</p>
+                        <span class="note-author">— Always Here</span>
+                    </div>
+                    <div class="sticky-note add-note" style="--bg:#f3f4f6;--rotate:1deg;" id="addNoteBtn">
+                        <p>+ Add Your Memory</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Memory Modal -->
+            <div class="modal" id="memoryModal">
+                <div class="modal-content glass-card">
+                    <button class="modal-close" id="memoryModalClose">&times;</button>
+                    <h3>Add a Memory</h3>
+                    <textarea id="memoryInput" placeholder="Write your memory here..." maxlength="200"></textarea>
+                    <input type="text" id="memoryAuthor" placeholder="Your name" maxlength="30">
+                    <button class="btn-primary" id="memorySubmit">Add to Wall</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 7: Fun Facts =================== -->
+        <section class="section section-facts" id="sectionFacts">
+            <div class="section-container">
+                <h2 class="section-heading reveal-up">Fun Facts About <span class="heading-accent">Turning 23</span></h2>
+                <div class="facts-grid">
+                    <div class="fact-card glass-card reveal-up" style="--delay:0.1s">
+                        <div class="fact-number" data-target="23" data-suffix=" ☀️">0</div>
+                        <p class="fact-label">Trips Around the Sun</p>
+                    </div>
+                    <div class="fact-card glass-card reveal-up" style="--delay:0.2s">
+                        <div class="fact-number" data-target="8401" data-suffix="+">0</div>
+                        <p class="fact-label">Days of Living</p>
+                    </div>
+                    <div class="fact-card glass-card reveal-up" style="--delay:0.3s">
+                        <div class="fact-number" data-target="201624" data-suffix="">0</div>
+                        <p class="fact-label">Hours of Experiences</p>
+                    </div>
+                    <div class="fact-card glass-card reveal-up" style="--delay:0.4s">
+                        <div class="fact-number counter-special" data-target="1000000" data-suffix="+">0</div>
+                        <p class="fact-label">Smiles Shared</p>
+                        <p class="fact-sub">and counting...</p>
+                    </div>
+                    <div class="fact-card glass-card reveal-up" style="--delay:0.5s">
+                        <div class="fact-number" data-target="999999" data-suffix="+">0</div>
+                        <p class="fact-label">Memories Made</p>
+                    </div>
+                    <div class="fact-card glass-card reveal-up" style="--delay:0.6s">
+                        <div class="fact-number counter-infinity" data-target="0" data-suffix="∞">0</div>
+                        <p class="fact-label">Memories Ahead</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 8: Countdown =================== -->
+        <section class="section section-countdown" id="sectionCountdown">
+            <div class="section-container">
+                <h2 class="section-heading reveal-up">Birthday <span class="heading-accent">Countdown</span></h2>
+                <div class="countdown-container reveal-up" id="countdownContainer">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 9: Fireworks =================== -->
+        <section class="section section-fireworks" id="sectionFireworks">
+            <div class="section-container" style="text-align:center;">
+                <h2 class="section-heading reveal-up">Time to <span class="heading-accent">Celebrate!</span></h2>
+                <p class="section-subtext reveal-up">Hit the button and light up the sky 🌌</p>
+                <button class="celebrate-btn reveal-up" id="celebrateBtn">
+                    <span>🎆</span> Celebrate! <span>🎆</span>
+                    <div class="celebrate-btn-glow"></div>
+                </button>
+                <canvas id="fireworksCanvas" class="fireworks-canvas"></canvas>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 10: Secret Letter =================== -->
+        <section class="section section-letter" id="sectionLetter">
+            <div class="section-container section-narrow" style="text-align:center;">
+                <h2 class="section-heading reveal-up">A <span class="heading-accent">Secret</span> Letter</h2>
+                <div class="envelope-wrapper reveal-up" id="envelopeWrapper">
+                    <div class="envelope" id="envelope">
+                        <div class="envelope-flap" id="envelopeFlap"></div>
+                        <div class="envelope-body">
+                            <div class="envelope-seal">♥</div>
+                        </div>
+                    </div>
+                    <button class="btn-primary envelope-btn" id="openLetterBtn">Open Letter</button>
+                </div>
+                <div class="letter-content glass-card" id="letterContent" style="display:none;">
+                    <div class="letter-paper">
+                        <p class="letter-date">August 2, 2026</p>
+                        <p class="letter-greeting">Dear Friend,</p>
+                        <p>If you're reading this, it means today is your special day — and I wanted to do something different this year. Not just a text, not just a call, but something you can come back to whenever you need a reminder of how incredible you are.</p>
+                        <p>You've been through so much, and yet here you are — standing tall, smiling, and making everyone around you better. That's not ordinary. That's extraordinary.</p>
+                        <p>I hope 23 treats you with all the love, success, and happiness you deserve. I hope you laugh until your stomach hurts, travel to places you've only dreamed of, and find peace in the small moments.</p>
+                        <p>Thank you for being you. Thank you for being my friend. Thank you for every memory, every laugh, every late-night conversation.</p>
+                        <p>Here's to 23 — and to all the beautiful chapters still unwritten.</p>
+                        <p class="letter-closing">With all my heart,</p>
+                        <p class="letter-signature">Your Best Friend ♥</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 12: Birthday Quiz =================== -->
+        <section class="section section-quiz" id="sectionQuiz">
+            <div class="section-container section-narrow">
+                <h2 class="section-heading reveal-up">Birthday <span class="heading-accent">Quiz</span></h2>
+                <p class="section-subtext reveal-up">How well do you know the birthday star? 🌟</p>
+                <div class="quiz-container glass-card reveal-up" id="quizContainer">
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                    </div>
+                    <div class="quiz-question" id="quizQuestion"></div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    <div class="quiz-result" id="quizResult" style="display:none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 13: Memory Jar =================== -->
+        <section class="section section-jar" id="sectionJar">
+            <div class="section-container" style="text-align:center;">
+                <h2 class="section-heading reveal-up">Memory <span class="heading-accent">Jar</span></h2>
+                <p class="section-subtext reveal-up">Click the jar to reveal sweet messages 🍯</p>
+                <div class="jar-wrapper reveal-up">
+                    <div class="jar" id="memoryJar">
+                        <div class="jar-lid"></div>
+                        <div class="jar-body">
+                            <div class="jar-notes" id="jarNotes">
+                                <span class="jar-note" style="--x:20%;--y:60%;--r:-15deg;background:#fef3c7;"></span>
+                                <span class="jar-note" style="--x:50%;--y:40%;--r:10deg;background:#dbeafe;"></span>
+                                <span class="jar-note" style="--x:70%;--y:70%;--r:-5deg;background:#fce7f3;"></span>
+                                <span class="jar-note" style="--x:35%;--y:50%;--r:20deg;background:#d1fae5;"></span>
+                                <span class="jar-note" style="--x:60%;--y:30%;--r:-10deg;background:#ede9fe;"></span>
+                                <span class="jar-note" style="--x:40%;--y:75%;--r:5deg;background:#fef3c7;"></span>
+                            </div>
+                            <div class="jar-glow"></div>
+                        </div>
+                    </div>
+                    <div class="jar-message glass-card" id="jarMessage" style="display:none;">
+                        <p id="jarMessageText"></p>
+                        <button class="btn-secondary" id="jarNextBtn">Next Memory ✨</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 14: Achievement Cards =================== -->
+        <section class="section section-achievements" id="sectionAchievements">
+            <div class="section-container">
+                <h2 class="section-heading reveal-up">Achievement <span class="heading-accent">Unlocked</span></h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card reveal-up" style="--delay:0.1s">
+                        <div class="achievement-badge">🏆</div>
+                        <h3>Best Friend Award</h3>
+                        <p>For being the most incredible friend anyone could ask for.</p>
+                        <div class="achievement-glow"></div>
+                    </div>
+                    <div class="achievement-card reveal-up" style="--delay:0.2s">
+                        <div class="achievement-badge">💎</div>
+                        <h3>Kind Soul</h3>
+                        <p>Rare and precious — a heart made of pure gold.</p>
+                        <div class="achievement-glow"></div>
+                    </div>
+                    <div class="achievement-card reveal-up" style="--delay:0.3s">
+                        <div class="achievement-badge">👑</div>
+                        <h3>Legend Since 2003</h3>
+                        <p>23 years of making the world a better place.</p>
+                        <div class="achievement-glow"></div>
+                    </div>
+                    <div class="achievement-card reveal-up" style="--delay:0.4s">
+                        <div class="achievement-badge">💰</div>
+                        <h3>Future Millionaire</h3>
+                        <p>With that ambition? It's only a matter of time.</p>
+                        <div class="achievement-glow"></div>
+                    </div>
+                    <div class="achievement-card reveal-up" style="--delay:0.5s">
+                        <div class="achievement-badge">😊</div>
+                        <h3>Always Smiling</h3>
+                        <p>Your smile is contagious and lights up every room.</p>
+                        <div class="achievement-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== SECTION 15: Ending =================== -->
+        <section class="section section-ending" id="sectionEnding">
+            <canvas id="endingCanvas" class="ending-canvas"></canvas>
+            <div class="ending-content">
+                <h2 class="ending-title reveal-up">
+                    <span>Happy 23rd Birthday</span>
+                </h2>
+                <p class="ending-name reveal-up">Friend's Name Here</p>
+                <p class="ending-quote reveal-up">"May your next chapter be even brighter than the last."</p>
+                <div class="ending-hearts reveal-up">
+                    <span>♥</span><span>♥</span><span>♥</span>
+                </div>
+            </div>
+            <div class="floating-lanterns" id="floatingLanterns"></div>
+        </section>
+
+    </main>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
